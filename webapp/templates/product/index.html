@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <div class="alert alert-warning" role="alert">
+              {% for message in messages %}
+                  {{ message }}<br>
+              {% endfor %}
+          </div>
+          {% endif %}
+      {% endwith %}
+      {% for product in product_list %}
+      <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="card-img-top" src="/static/img/6.png" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">{{ product.description }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">{{ product.kind }} горшок</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">{{ product.price }}</button>
+                  <form action="/buy" method="post">
+                    <button class="btn btn-primary" type="submit" style="background-color:MediumSeaGreen;">Купить</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
